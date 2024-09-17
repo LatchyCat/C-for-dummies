@@ -12,9 +12,11 @@ int getValidInput(const string& prompt) {
     while (true) {
         cout << prompt;
         if (cin >> input) {
+            // Clear any extra input in the buffer
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return input;
         }
+        // Clear the error state and ignore bad input
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Invalid input. Please enter a number." << endl;
@@ -22,32 +24,27 @@ int getValidInput(const string& prompt) {
 }
 
 int main() {
-    // This program demonstrates the use of functions for input validation and addition
-
-    // addNumbers: A function that takes two integers and returns their sum
-    // getValidInput: A function that prompts the user for input and ensures it's a valid integer
-
-    // Main function: Orchestrates the program flow
-    // 1. Prompts for two numbers using getValidInput
-    // 2. Adds the numbers using addNumbers
-    // 3. Displays the result
-
+  // Prompt for two numbers using getValidInput
     int testNum1 = getValidInput("Enter the first number: ");
     int testNum2 = getValidInput("Enter the second number: ");
 
-    int testNum1, testNum2;
-    cout << "Enter the first number: ";
-    cin >> testNum1;
-    cout << "Enter the second number: ";
-    cin >> testNum2;
+    // Add the numbers using addNumbers
     int result = addNumbers(testNum1, testNum2);
+
+    // Display the result
     cout << "The result is: " << result << endl;
 
-    if (cin.fail()) {
-        cout << "Invalid input. Operation failed." << endl;
-        return 1;
-    } else {
-        cout << "The result is: " << result << endl;
-        return 0;
-    }
+    return 0; // Program ended successfully
 }
+
+//! Testing file and it works successfully
+// ╰─± g++ CreatingFunctions.cpp -o outputfile
+// ╭─latchy at Oriel’s MacBook Pro in ~/CPlusPlus_Programs/Conversion_Project on main✘✘✘
+// ╰─± ./outputfile
+// Enter the first number: aas
+// Invalid input. Please enter a number.
+// Enter the first number: 22
+// Enter the second number: asdas
+// Invalid input. Please enter a number.
+// Enter the second number: 10
+// The result is: 32
